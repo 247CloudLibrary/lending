@@ -86,6 +86,27 @@ public class BlackListController {
         return ResponseEntity.ok(new ApiResponseView<>(blackListView));
     }
 
+    //도서관+회원
+    @GetMapping("/{libraryId}/{uid}")
+    public ResponseEntity<ApiResponseView<List<BlackListView>>> getBlackLists(@PathVariable("libraryId") Long libraryId, @PathVariable("uid") Long uid) {
+        BlackListView blackListView1 = BlackListView.builder()
+                .uid(1L)
+                .libraryId(123L)
+                .libraryName("도서관과회원")
+                .build();
+        BlackListView blackListView2 = BlackListView.builder()
+                .uid(2L)
+                .libraryId(234L)
+                .libraryName("한꺼번에")
+                .build();
+        List<BlackListView> blackListView = new ArrayList<>();
+        blackListView.add(blackListView1);
+        blackListView.add(blackListView2);
+
+        //return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(AdminView::new).collect(Collectors.toList())));
+        return ResponseEntity.ok(new ApiResponseView<>(blackListView));
+    }
+
     //블랙리스트 삭제
     @DeleteMapping("/{uid}")
     public ResponseEntity<ApiResponseView<BlackListView>> deleteBlackList(@PathVariable("uid") String uid) {

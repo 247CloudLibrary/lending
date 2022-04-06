@@ -81,7 +81,7 @@ public class LibrariesRulesController {
 
     //도서관제재 삭제
     @DeleteMapping("/{libraryId}")
-    public ResponseEntity<ApiResponseView<LibrariesRulesView>> deleteRules(@PathVariable("id") Long id) {
+    public ResponseEntity<ApiResponseView<LibrariesRulesView>> deleteRules(@PathVariable("libraryId") Long libraryId) {
 
         return ResponseEntity.ok().build();
 

@@ -42,7 +42,7 @@ public class LendingController {
                 .bookId(512412L)
                 .uid(31213423L)
                 .libraryId(1352413L)
-                .libraryName("정독도서관")
+                .libraryName("그냥대출전체조회최신순")
                 .lendingstatus(LendingStatus.RETURN)
                 .lendingDateTime(LocalDateTime.now())
                 .returnDateTime(LocalDateTime.now())
@@ -77,7 +77,7 @@ public class LendingController {
                 .bookId(512412L)
                 .uid(31213423L)
                 .libraryId(1352413L)
-                .libraryName("회원별 대출 조회")
+                .libraryName("회원별 대출 전체 조회")
                 .lendingstatus(LendingStatus.OUT)
                 .lendingDateTime(LocalDateTime.now())
                 .returnDateTime(LocalDateTime.now())
@@ -105,14 +105,14 @@ public class LendingController {
     }
 
     //회원별 대출 조회
-    @GetMapping("/out/{uid}")
+    @GetMapping("/{uid}/out")
     public ResponseEntity<ApiResponseView<List<LendingView>>> getOut(@PathVariable("uid") Long uid) {
         LendingView lendingView1 = LendingView.builder()
                 .lendingId(35134L)
                 .bookId(512412L)
                 .uid(31213423L)
                 .libraryId(1352413L)
-                .libraryName("회원별 대출 조회")
+                .libraryName("회원별 대출중")
                 .lendingstatus(LendingStatus.OUT)
                 .lendingDateTime(LocalDateTime.now())
                 .returnDateTime(LocalDateTime.now())
@@ -140,7 +140,7 @@ public class LendingController {
     }
 
     //회원별 반납 조회
-    @GetMapping("/return/{uid}")
+    @GetMapping("/{uid}/return")
     public ResponseEntity<ApiResponseView<List<LendingView>>> getReturn(@PathVariable("uid") Long uid) {
         LendingView lendingView1 = LendingView.builder()
                 .lendingId(35134L)
@@ -175,7 +175,7 @@ public class LendingController {
     }
 
     //회원별 연체 조회
-    @GetMapping("/overdue/{uid}")
+    @GetMapping("/{uid}/overdue")
     public ResponseEntity<ApiResponseView<List<LendingView>>> getOverdue(@PathVariable("uid") Long uid) {
         LendingView lendingView1 = LendingView.builder()
                 .lendingId(35134L)

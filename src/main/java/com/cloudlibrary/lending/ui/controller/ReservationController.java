@@ -56,7 +56,7 @@ public class ReservationController {
     }
 
     //예약 bookId로 조회
-    @GetMapping("/{bookdId}")
+    @GetMapping("/book/{bookId}")
     public ResponseEntity<ApiResponseView<List<ReservationView>>> getReservationsByBookId(@PathVariable("bookId") Long bookId) {
         ReservationView reservationView1 = ReservationView.builder()
                 .orderNum(1231L)
@@ -122,7 +122,7 @@ public class ReservationController {
     }
 
     //분실시 책에대해 전부 예약 취소
-    @DeleteMapping("/{bookId}")
+    @DeleteMapping("/{bookId}/all")
     public ResponseEntity<ApiResponseView<ReservationView>> deleteByBookId(@PathVariable("bookId") Long bookId) {
 
         return ResponseEntity.ok().build();
