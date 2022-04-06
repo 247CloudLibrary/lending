@@ -69,6 +69,41 @@ public class LendingController {
         return ResponseEntity.ok(new ApiResponseView<>(lendingView));
     }
 
+    //회원별 대출 전체 조회
+    @GetMapping("/{uid}")
+    public ResponseEntity<ApiResponseView<List<LendingView>>> getMember(@PathVariable("uid") Long uid) {
+        LendingView lendingView1 = LendingView.builder()
+                .lendingId(35134L)
+                .bookId(512412L)
+                .uid(31213423L)
+                .libraryId(1352413L)
+                .libraryName("회원별 대출 조회")
+                .lendingstatus(LendingStatus.OUT)
+                .lendingDateTime(LocalDateTime.now())
+                .returnDateTime(LocalDateTime.now())
+                .barcode("fhs23a234d")
+                .rfId("546745ysertg")
+                .build();
+        LendingView lendingView2 = LendingView.builder()
+                .lendingId(72335134L)
+                .bookId(9878512412L)
+                .uid(554221213423L)
+                .libraryId(985435243L)
+                .libraryName("정독정독도서관")
+                .lendingstatus(LendingStatus.OUT)
+                .lendingDateTime(LocalDateTime.now())
+                .returnDateTime(LocalDateTime.now())
+                .barcode("34235kfjs3")
+                .rfId("ytuwtwkjeq9")
+                .build();
+        List<LendingView> lendingView = new ArrayList<>();
+        lendingView.add(lendingView1);
+        lendingView.add(lendingView2);
+
+        //return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(AdminView::new).collect(Collectors.toList())));
+        return ResponseEntity.ok(new ApiResponseView<>(lendingView));
+    }
+
     //회원별 대출 조회
     @GetMapping("/out/{uid}")
     public ResponseEntity<ApiResponseView<List<LendingView>>> getOut(@PathVariable("uid") Long uid) {
@@ -210,7 +245,7 @@ public class LendingController {
 
     //반납
     @PatchMapping("/{lendingId}")
-    public ResponseEntity<ApiResponseView<LendingView>> updateLending(@RequestBody LendingUpdateRequest request) {
+    public ResponseEntity<ApiResponseView<LendingView>> updateLendingReturn(@RequestBody LendingUpdateRequest request) {
 
         return ResponseEntity.ok(new ApiResponseView<>(LendingView.builder()
                 .lendingId(72335134L)
@@ -219,6 +254,24 @@ public class LendingController {
                 .libraryId(985435243L)
                 .libraryName("반납으로 수정함")
                 .lendingstatus(LendingStatus.RETURN)
+                .lendingDateTime(LocalDateTime.now())
+                .returnDateTime(LocalDateTime.now())
+                .barcode("34235kfjs3")
+                .rfId("ytuwtwkjeq9")
+                .build()
+        ));
+    }
+
+    //분실
+    @PatchMapping("/{lendingId}/loss")
+    public ResponseEntity<ApiResponseView<LendingView>> updateLendingLOSS(@RequestBody LendingUpdateRequest request) {
+        return ResponseEntity.ok(new ApiResponseView<>(LendingView.builder()
+                .lendingId(72335134L)
+                .bookId(9878512412L)
+                .uid(554221213423L)
+                .libraryId(985435243L)
+                .libraryName("분실로 수정함")
+                .lendingstatus(LendingStatus.LOSS)
                 .lendingDateTime(LocalDateTime.now())
                 .returnDateTime(LocalDateTime.now())
                 .barcode("34235kfjs3")
