@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @Api(value = "도서관규정 API")
-@RequestMapping("/v1/lending/libraries/rules")
+@RequestMapping("/v1/lending/libraries-rules")
 public class LibrariesRulesController {
     /*
     private final ReservationOperationUseCase reservationOperationUseCase;
@@ -31,8 +31,8 @@ public class LibrariesRulesController {
      */
 
     //유저 대출 가능 여부 조회
-    @GetMapping("/{uid}")
-    public ResponseEntity<ApiResponseView<Boolean>> getPossible(@PathVariable("uid") Long uid) {
+    @GetMapping("")
+    public ResponseEntity<ApiResponseView<Boolean>> getPossible(@RequestParam("uid") Long uid) {
         //var query = new AdminReadUseCase.AdminFindQuery(id);
 
         //var result = AdminReadUseCase.getAdmin(query);
@@ -42,7 +42,7 @@ public class LibrariesRulesController {
     }
 
     //도서관제재 등록
-    @PostMapping("")
+    @PatchMapping("")
     public ResponseEntity<ApiResponseView<LibrariesRulesView>> createRules(@RequestBody LibrariesRulesCreateRequest request) {
         if (ObjectUtils.isEmpty(request)) {
             throw new CloudLibraryException(MessageType.BAD_REQUEST);
@@ -62,7 +62,7 @@ public class LibrariesRulesController {
         //return ResponseEntity.ok(new ApiResponseView<>(new AdminView(result)));
         return ResponseEntity.ok(new ApiResponseView<>(LibrariesRulesView.builder()
                 .libraryId(3L)
-                .libraryName("갱넘")
+                .libraryName("도서관제재 등록")
                 .lendingAvailableCount(5)
                 .lengdingAvailableDays(7)
                 .overdueCount(6)
@@ -70,20 +70,5 @@ public class LibrariesRulesController {
                 .lendingLimitDays(2)
                 .build()
         ));
-    }
-
-    //도서관제재 수정
-    @PatchMapping("/{libraryId}")
-    public ResponseEntity<ApiResponseView<LibrariesRulesView>> updateRules(@RequestBody LibrariesRulesUpdateRequest request) {
-
-        return ResponseEntity.ok().build();
-    }
-
-    //도서관제재 삭제
-    @DeleteMapping("/{libraryId}")
-    public ResponseEntity<ApiResponseView<LibrariesRulesView>> deleteRules(@PathVariable("libraryId") Long libraryId) {
-
-        return ResponseEntity.ok().build();
-
     }
 }
