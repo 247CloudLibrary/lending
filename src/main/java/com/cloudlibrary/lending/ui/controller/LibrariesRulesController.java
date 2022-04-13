@@ -14,6 +14,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@CrossOrigin(origins = "*")
 @RestController
 @Api(value = "도서관규정 API")
 @RequestMapping("/v1/lending/libraries-rules")

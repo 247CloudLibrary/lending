@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@CrossOrigin(origins = "*")
 @RestController
 @Api(value = "블랙리스트 API")
 @RequestMapping("/v1/lending/blacklist")

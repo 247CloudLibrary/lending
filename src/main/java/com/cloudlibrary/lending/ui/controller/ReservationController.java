@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@CrossOrigin(origins = "*")
 @RestController
 @Api(value = "예약 API")
 @RequestMapping("/v1/lending/reservation")
