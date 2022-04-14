@@ -68,16 +68,16 @@ public class BlackListController {
 
     //블랙리스트 조회
     @GetMapping("")
-    public ResponseEntity<ApiResponseView<List<BlackListView>>> getBlackLists(@RequestParam("uid") Long uid, @RequestParam("libraryId") Long libraryId) {
+    public ResponseEntity<ApiResponseView<List<BlackListView>>> getBlackLists() {
         BlackListView blackListView1 = BlackListView.builder()
                 .uid(1L)
-                .libraryId(123L)
+                .libraryId(2L)
                 .libraryName("개포블랙")
                 .build();
         BlackListView blackListView2 = BlackListView.builder()
                 .uid(2L)
-                .libraryId(234L)
-                .libraryName("역삼블랙")
+                .libraryId(2L)
+                .libraryName("개포블랙")
                 .build();
         List<BlackListView> blackListView = new ArrayList<>();
         blackListView.add(blackListView1);

@@ -26,7 +26,7 @@ public class LendingView {
     private final String libraryName;
 
     @ApiModelProperty(value = "대출 상태")
-    private final LendingStatus lendingstatus;
+    private final LendingStatus lendingStatus;
     @ApiModelProperty(value = "대출 일시")
     private final LocalDateTime lendingDateTime;
     @ApiModelProperty(value = "반납 예정 일시")
@@ -34,6 +34,6 @@ public class LendingView {
     @ApiModelProperty(value = "바코드")
     private final String barcode;
     @ApiModelProperty(value = "rfid")
-    private final String rfId;
+    private final String rfid;
 
 }

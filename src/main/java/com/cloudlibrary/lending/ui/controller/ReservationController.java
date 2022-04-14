@@ -36,7 +36,7 @@ public class ReservationController {
     }
      */
 
-    //예약 등록
+
     @PostMapping("")
     public ResponseEntity<ApiResponseView<ReservationView>> createReservation(@RequestBody ReservationCreateRequest request) {
         if (ObjectUtils.isEmpty(request)) {
@@ -45,35 +45,35 @@ public class ReservationController {
 
         //return ResponseEntity.ok(new ApiResponseView<>(new ReservationView(result)));
         return ResponseEntity.ok(new ApiResponseView<>(ReservationView.builder()
-                .orderNum(1231L)
-                .lendingId(555L)
-                .uid(7700L)
-                .bookId(39875238975L)
-                .libraryId(154135132L)
+                .orderNum(1L)
+                .lendingId(1L)
+                .uid(1L)
+                .bookId(1L)
+                .libraryId(1L)
                 .libraryName("예약등록서초도서관")
                 .reservationDateTime(LocalDateTime.now())
                 .build()
         ));
     }
 
-    //예약 조회
+
     @GetMapping("")
     public ResponseEntity<ApiResponseView<List<ReservationView>>> getReservations() {
         ReservationView reservationView1 = ReservationView.builder()
-                .orderNum(874L)
-                .lendingId(55246755L)
-                .uid(263547700L)
-                .bookId(4362439875238975L)
-                .libraryId(234562154135132L)
+                .orderNum(2L)
+                .lendingId(2L)
+                .uid(2L)
+                .bookId(2L)
+                .libraryId(1L)
                 .libraryName("예약조회도서관")
                 .reservationDateTime(LocalDateTime.now())
                 .build();
         ReservationView reservationView2 = ReservationView.builder()
-                .orderNum(78456L)
-                .lendingId(2351L)
-                .uid(7452L)
-                .bookId(1243623L)
-                .libraryId(568746L)
+                .orderNum(3L)
+                .lendingId(3L)
+                .uid(3L)
+                .bookId(3L)
+                .libraryId(1L)
                 .libraryName("송파도서관")
                 .reservationDateTime(LocalDateTime.now())
                 .build();
@@ -85,21 +85,11 @@ public class ReservationController {
         return ResponseEntity.ok(new ApiResponseView<>(reservationView));
     }
 
-    //예약 취소 한건
+
     @DeleteMapping("")
     public ResponseEntity<ApiResponseView<ReservationView>> deleteByOrderNum(@RequestParam("orderNum") String orderNum) {
         System.out.println(orderNum);
         return ResponseEntity.ok().build();
 
     }
-/*
-    //분실시 책에대해 전부 예약 취소
-    @DeleteMapping("/{bookId}/all")
-    public ResponseEntity<ApiResponseView<ReservationView>> deleteByBookId(@PathVariable("bookId") Long bookId) {
-
-        return ResponseEntity.ok().build();
-
-    }
-
- */
 }

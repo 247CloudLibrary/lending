@@ -62,7 +62,7 @@ public class LibrariesRulesController {
 */
         //return ResponseEntity.ok(new ApiResponseView<>(new AdminView(result)));
         return ResponseEntity.ok(new ApiResponseView<>(LibrariesRulesView.builder()
-                .libraryId(3L)
+                .libraryId(1L)
                 .libraryName("도서관제재 등록")
                 .lendingAvailableCount(5)
                 .lengdingAvailableDays(7)
