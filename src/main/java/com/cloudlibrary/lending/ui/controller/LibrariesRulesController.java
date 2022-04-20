@@ -1,6 +1,8 @@
 package com.cloudlibrary.lending.ui.controller;
 
 import com.cloudlibrary.lending.application.domain.LibrariesRules;
+import com.cloudlibrary.lending.application.service.LibrariesRulesOperationUseCase;
+import com.cloudlibrary.lending.application.service.LibrariesRulesReadUseCase;
 import com.cloudlibrary.lending.exception.CloudLibraryException;
 import com.cloudlibrary.lending.exception.MessageType;
 import com.cloudlibrary.lending.ui.requestBody.LibrariesRulesCreateRequest;
@@ -9,6 +11,7 @@ import com.cloudlibrary.lending.ui.view.ApiResponseView;
 import com.cloudlibrary.lending.ui.view.lending.LibrariesRulesView;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -19,21 +22,19 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "도서관규정 API")
 @RequestMapping("/v1/lending/libraries-rules")
 public class LibrariesRulesController {
-    /*
-    private final ReservationOperationUseCase reservationOperationUseCase;
-    private final ReservationReadUseCase reservationReadUseCase;
+
+    private final LibrariesRulesOperationUseCase librariesRulesOperationUseCase;
+    private final LibrariesRulesReadUseCase librariesRulesReadUseCase;
 
     @Autowired
-    public BookController(ReservationOperationUseCase reservationOperationUseCase,
-                          ReservationReadUseCase reservationReadUseCase) {
-        this.reservationOperationUseCase = reservationOperationUseCase;
-        this.reservationReadUseCase = reservationReadUseCase;
+    public LibrariesRulesController(LibrariesRulesOperationUseCase librariesRulesOperationUseCase,
+                          LibrariesRulesReadUseCase librariesRulesReadUseCase) {
+        this.librariesRulesOperationUseCase = librariesRulesOperationUseCase;
+        this.librariesRulesReadUseCase = librariesRulesReadUseCase;
     }
-     */
 
-    //유저 대출 가능 여부 조회
     @GetMapping("")
-    public ResponseEntity<ApiResponseView<Boolean>> getPossible(@RequestParam("uid") Long uid) {
+    public ResponseEntity<ApiResponseView<Boolean>> getUserLendingPossible(@RequestParam("uid") Long uid) {
         //var query = new AdminReadUseCase.AdminFindQuery(id);
 
         //var result = AdminReadUseCase.getAdmin(query);
@@ -42,34 +43,24 @@ public class LibrariesRulesController {
         return ResponseEntity.ok(new ApiResponseView<>(true));
     }
 
-    //도서관제재 등록
     @PatchMapping("")
     public ResponseEntity<ApiResponseView<LibrariesRulesView>> createRules(@RequestBody LibrariesRulesCreateRequest request) {
         if (ObjectUtils.isEmpty(request)) {
             throw new CloudLibraryException(MessageType.BAD_REQUEST);
         }
-/*
-        var command = AdminOperationUseCase.AdminCreatedCommand.builder()
-                .rid(request.getRid())
+
+        var command = LibrariesRulesOperationUseCase.LibrariesRulesCreatedCommand.builder()
                 .libraryId(request.getLibraryId())
-                .isbn(request.getIsbn())
-                .title(request.getTitle())
-                .thumbnailImage(request.getThumbnailImage())
-                .coverImage(request.getCoverImage())
+                .libraryName(request.getLibraryName())
+                .lendingAvailableCount(request.getLendingAvailableCount())
+                .lengdingAvailableDays(request.getLengdingAvailableDays())
+                .overdueCount(request.getOverdueCount())
+                .longtermOverdueDays(request.getLongtermOverdueDays())
+                .lendingLimitDays(request.getLendingLimitDays())
                 .build();
 
-        var result = AdminOperationUseCase.createAdmin(command);
-*/
-        //return ResponseEntity.ok(new ApiResponseView<>(new AdminView(result)));
-        return ResponseEntity.ok(new ApiResponseView<>(LibrariesRulesView.builder()
-                .libraryId(1L)
-                .libraryName("도서관제재 등록")
-                .lendingAvailableCount(5)
-                .lengdingAvailableDays(7)
-                .overdueCount(6)
-                .longtermOverdueDays(3)
-                .lendingLimitDays(2)
-                .build()
-        ));
+        var result = librariesRulesOperationUseCase.createLibrariesRules(command);
+
+        return ResponseEntity.ok(new ApiResponseView<>(new LibrariesRulesView(result)));
     }
 }

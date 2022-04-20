@@ -1,11 +1,14 @@
 package com.cloudlibrary.lending.ui.view.lending;
 
+import com.cloudlibrary.lending.application.service.LibrariesRulesReadUseCase;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+@AllArgsConstructor
 @Getter
 @ToString
 @Builder
@@ -28,5 +31,16 @@ public class LibrariesRulesView {
     private final int longtermOverdueDays;
     @ApiModelProperty(value = "대출제한 일수")
     private final int lendingLimitDays;
+
+    public LibrariesRulesView(LibrariesRulesReadUseCase.FindLibrariesRulesResult result) {
+
+        this.libraryId = result.getLibraryId();
+        this.libraryName = result.getLibraryName();
+        this.lendingAvailableCount = result.getLendingAvailableCount();
+        this.lengdingAvailableDays = result.getLengdingAvailableDays();
+        this.overdueCount = result.getOverdueCount();
+        this.longtermOverdueDays = result.getLongtermOverdueDays();
+        this.lendingLimitDays = result.getLendingLimitDays();
+    }
 
 }
