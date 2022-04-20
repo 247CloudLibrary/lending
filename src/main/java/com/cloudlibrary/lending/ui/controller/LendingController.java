@@ -1,6 +1,8 @@
 package com.cloudlibrary.lending.ui.controller;
 
 import com.cloudlibrary.lending.application.domain.LendingStatus;
+import com.cloudlibrary.lending.application.service.ReservationOperationUseCase;
+import com.cloudlibrary.lending.application.service.ReservationReadUseCase;
 import com.cloudlibrary.lending.exception.CloudLibraryException;
 import com.cloudlibrary.lending.exception.MessageType;
 import com.cloudlibrary.lending.ui.requestBody.LendingCreateRequest;
@@ -9,6 +11,7 @@ import com.cloudlibrary.lending.ui.view.ApiResponseView;
 import com.cloudlibrary.lending.ui.view.lending.LendingView;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -23,17 +26,15 @@ import java.util.List;
 @Api(value = "대출 API")
 @RequestMapping("/v1/lending")
 public class LendingController {
-    /*
     private final ReservationOperationUseCase reservationOperationUseCase;
     private final ReservationReadUseCase reservationReadUseCase;
 
-    @Autowired
-    public BookController(ReservationOperationUseCase reservationOperationUseCase,
+    public LendingController(ReservationOperationUseCase reservationOperationUseCase,
                           ReservationReadUseCase reservationReadUseCase) {
         this.reservationOperationUseCase = reservationOperationUseCase;
         this.reservationReadUseCase = reservationReadUseCase;
     }
-     */
+
 
     @GetMapping("")
     public ResponseEntity<ApiResponseView<List<LendingView>>> getAllOrderByAsc() {
