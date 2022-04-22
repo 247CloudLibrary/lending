@@ -4,9 +4,11 @@ import com.cloudlibrary.lending.application.domain.Lending;
 import com.cloudlibrary.lending.application.domain.LendingStatus;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 public interface LendingReadUseCase {
+
+    List<FindLendingResult> getAllLendingOrderByTimeDesc();
 
     @NoArgsConstructor
     @EqualsAndHashCode(callSuper = false)

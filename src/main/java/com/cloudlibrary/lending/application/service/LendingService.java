@@ -1,11 +1,16 @@
 package com.cloudlibrary.lending.application.service;
 
 import com.cloudlibrary.lending.application.domain.Lending;
+import com.cloudlibrary.lending.infrastructure.mapper.LendingMapper;
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.entity.LendingEntity;
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.repository.LendingEntityRepository;
 import com.cloudlibrary.lending.ui.feign.FeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -13,10 +18,12 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
 
     private final LendingEntityRepository lendingEntityRepository;
     private final FeignClient feignClient;
+    private final LendingMapper lendingMapper;
 
-    public LendingService(LendingEntityRepository lendingEntityRepository, FeignClient feignClient) {
+    public LendingService(LendingEntityRepository lendingEntityRepository, FeignClient feignClient, LendingMapper lendingMapper) {
         this.lendingEntityRepository = lendingEntityRepository;
         this.feignClient = feignClient;
+        this.lendingMapper = lendingMapper;
     }
 
     @Override
@@ -34,10 +41,15 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
                 .build();
         LendingEntity lendingEntity = new LendingEntity(lending);
         lendingEntityRepository.save(lendingEntity);
-        String feign = feignClient.compositeBookOut(command.getBookId(), command.getLendingStatus());
-        System.out.println("feign = " + feign);
+        //String feign = feignClient.compositeBookOut(command.getBookId(), command.getLendingStatus());
+        //System.out.println("feign = " + feign);
         lending = lendingEntity.toLending();
 
         return FindLendingResult.findByLending(lending);
+    }
+
+    @Override
+    public List<FindLendingResult> getAllLendingOrderByTimeDesc() {
+        return lendingEntityRepository.findAllByOrderByLendingDateTimeDesc().stream().map(FindLendingResult::findByLending).collect(Collectors.toList());
     }
 }

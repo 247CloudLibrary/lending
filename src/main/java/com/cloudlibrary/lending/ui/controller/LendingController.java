@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @CrossOrigin(origins = "*")
@@ -52,7 +53,7 @@ public class LendingController {
                 .libraryId(request.getLibraryId())
                 .libraryName(request.getLibraryName())
                 .lendingStatus(LendingStatus.OUT)
-                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
+                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
                 .returnDateTime("0")
                 .barcode(request.getBarcode())
                 .rfid(request.getRfid())
@@ -66,37 +67,11 @@ public class LendingController {
     }
 
     @GetMapping("")
-    public ResponseEntity<ApiResponseView<List<LendingView>>> getAllOrderByAsc() {
-        LendingView lendingView1 = LendingView.builder()
-                .lendingId(1L)
-                .bookId(1L)
-                .uid(1L)
-                .libraryId(1L)
-                .libraryName("그냥대출전체조회최신순")
-                .lendingStatus(LendingStatus.RETURN)
-                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .returnDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .barcode("barcode2")
-                .rfid("rfid2")
-                .build();
-        LendingView lendingView2 = LendingView.builder()
-                .lendingId(2L)
-                .bookId(2L)
-                .uid(2L)
-                .libraryId(2L)
-                .libraryName("정독정독도서관")
-                .lendingStatus(LendingStatus.OUT)
-                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .returnDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .barcode("barcode2")
-                .rfid("ytuwtwkjeq9")
-                .build();
-        List<LendingView> lendingView = new ArrayList<>();
-        lendingView.add(lendingView1);
-        lendingView.add(lendingView2);
+    public ResponseEntity<ApiResponseView<List<LendingView>>> getAllLendingOrderByTimeDesc() {
+        var results = lendingReadUseCase.getAllLendingOrderByTimeDesc();
 
-        //return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(AdminView::new).collect(Collectors.toList())));
-        return ResponseEntity.ok(new ApiResponseView<>(lendingView));
+        return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(LendingView::new).collect(Collectors.toList())));
+
     }
 
 

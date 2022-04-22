@@ -1,5 +1,6 @@
 package com.cloudlibrary.lending.ui.view.lending;
 
+import com.cloudlibrary.lending.application.domain.Lending;
 import com.cloudlibrary.lending.application.domain.LendingStatus;
 import com.cloudlibrary.lending.application.service.LendingReadUseCase;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Getter
@@ -54,6 +53,5 @@ public class LendingView {
         this.barcode = result.getBarcode();
         this.rfid = result.getRfid();
     }
-
 
 }

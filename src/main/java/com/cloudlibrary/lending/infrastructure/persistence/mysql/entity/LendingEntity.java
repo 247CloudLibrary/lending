@@ -7,7 +7,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @DynamicUpdate
 @AllArgsConstructor
@@ -32,8 +31,10 @@ public class LendingEntity implements Serializable {
     @Column(nullable = false)
     private String libraryName;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private LendingStatus lendingStatus;
+
 
     @Column(nullable = false)
     private String lendingDateTime;
