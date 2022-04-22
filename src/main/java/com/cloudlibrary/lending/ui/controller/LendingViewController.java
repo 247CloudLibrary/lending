@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class LendingViewController {
                 .libraryId(1L)
                 .libraryName("회원별 대출 전체 조회")
                 .lendingStatus(LendingStatus.OUT)
-                .lendingDateTime(LocalDateTime.now())
-                .returnDateTime(LocalDateTime.now())
+                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
+                .returnDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .barcode("fhs23a234d")
                 .rfid("546745ysertg")
                 .build();
@@ -40,8 +41,8 @@ public class LendingViewController {
                 .libraryId(1L)
                 .libraryName("도서관")
                 .lendingStatus(LendingStatus.OUT)
-                .lendingDateTime(LocalDateTime.now())
-                .returnDateTime(LocalDateTime.now())
+                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
+                .returnDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .barcode("34235kfjs3")
                 .rfid("ytuwtwkjeq9")
                 .build();

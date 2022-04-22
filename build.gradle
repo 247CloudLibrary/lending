@@ -30,8 +30,25 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	runtimeOnly 'mysql:mysql-connector-java'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.modelmapper:modelmapper:2.4.5'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+	implementation 'com.amazonaws.secretsmanager:aws-secretsmanager-jdbc:1.0.7'
+	//implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.3'
+	//implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE'
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.1'
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()

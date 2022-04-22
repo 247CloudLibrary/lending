@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.ToString;
 
 public interface LibrariesRulesOperationUseCase {
-    LibrariesRulesReadUseCase.FindLibrariesRulesResult createLibrariesRules(LibrariesRulesCreatedCommand librariesRulesCreatedCommand);
-
+    LibrariesRulesReadUseCase.FindLibrariesRulesResult createLibrariesRules(LibrariesRulesCreatedCommand command);
+    void deleteLibrariesRules(LibrariesRulesDeleteCommand command);
 
     @EqualsAndHashCode(callSuper = false)
     @Builder

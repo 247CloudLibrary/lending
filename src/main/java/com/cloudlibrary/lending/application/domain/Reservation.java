@@ -17,7 +17,7 @@ public class Reservation {
     private final Long bookId;
     private final Long libraryId;
     private final String libraryName;
-    private final LocalDateTime reservationDateTime;
-    private final LocalDateTime cancelDateTime;
+    private final String reservationDateTime;
+    private final String cancelDateTime;
 
 }

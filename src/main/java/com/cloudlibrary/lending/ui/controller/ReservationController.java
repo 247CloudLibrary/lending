@@ -15,6 +15,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class ReservationController {
                 .bookId(1L)
                 .libraryId(1L)
                 .libraryName("예약등록서초도서관")
-                .reservationDateTime(LocalDateTime.now())
+                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .build()
         ));
     }
@@ -66,7 +67,7 @@ public class ReservationController {
                 .bookId(2L)
                 .libraryId(1L)
                 .libraryName("예약조회도서관")
-                .reservationDateTime(LocalDateTime.now())
+                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .build();
         ReservationView reservationView2 = ReservationView.builder()
                 .orderNum(3L)
@@ -75,7 +76,7 @@ public class ReservationController {
                 .bookId(3L)
                 .libraryId(1L)
                 .libraryName("송파도서관")
-                .reservationDateTime(LocalDateTime.now())
+                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .build();
         List<ReservationView> reservationView = new ArrayList<>();
         reservationView.add(reservationView1);

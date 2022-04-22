@@ -4,8 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
 @Getter
 @ToString
 @Builder
@@ -20,8 +18,8 @@ public class Lending {
 
     private final LendingStatus lendingStatus;
 
-    private final LocalDateTime lendingDateTime;
-    private final LocalDateTime returnDateTime;
+    private final String lendingDateTime;
+    private final String returnDateTime;
     private final String barcode;
     private final String rfid;
 }

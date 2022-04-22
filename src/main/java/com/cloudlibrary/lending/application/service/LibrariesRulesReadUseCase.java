@@ -1,13 +1,24 @@
 package com.cloudlibrary.lending.application.service;
 
 import com.cloudlibrary.lending.application.domain.LibrariesRules;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 public interface LibrariesRulesReadUseCase {
 
+
+    void getLibrariesRules(LibrariesRulesFindQuery query);
+
+    @NoArgsConstructor
+    @EqualsAndHashCode(callSuper = false)
+    @Getter
+    @ToString
+    class LibrariesRulesFindQuery {
+        private Long libraryId;
+
+        public LibrariesRulesFindQuery(Long libraryId) {
+            this.libraryId = libraryId;
+        }
+    }
 
     @Setter
     @Getter

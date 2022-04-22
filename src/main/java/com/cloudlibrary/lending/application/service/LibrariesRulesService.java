@@ -17,6 +17,11 @@ public class LibrariesRulesService implements LibrariesRulesReadUseCase, Librari
     }
 
     @Override
+    public void getLibrariesRules(LibrariesRulesFindQuery query) {
+
+    }
+
+    @Override
     public FindLibrariesRulesResult createLibrariesRules(LibrariesRulesCreatedCommand command) {
 
         LibrariesRules librariesRules = LibrariesRules.builder()
@@ -36,4 +41,12 @@ public class LibrariesRulesService implements LibrariesRulesReadUseCase, Librari
 
         return FindLibrariesRulesResult.findByLibrariesRules(librariesRules);
     }
+
+    @Override
+    public void deleteLibrariesRules(LibrariesRulesDeleteCommand command) {
+        LibrariesRulesEntity librariesRulesEntity = LibrariesRulesEntity.builder().libraryId(command.getLibraryId()).build();
+        librariesRulesEntityRepository.delete(librariesRulesEntity);
+    }
+
+
 }
