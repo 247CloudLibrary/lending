@@ -1,7 +1,5 @@
 package com.cloudlibrary.lending.ui.view.lending;
 
-import com.cloudlibrary.lending.application.domain.Lending;
-import com.cloudlibrary.lending.application.domain.LendingStatus;
 import com.cloudlibrary.lending.application.service.LendingReadUseCase;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,7 +26,7 @@ public class LendingView {
     private final String libraryName;
 
     @ApiModelProperty(value = "대출 상태")
-    private final LendingStatus lendingStatus;
+    private final String lendingStatus;
     @ApiModelProperty(value = "대출 일시")
     private final String lendingDateTime;
     @ApiModelProperty(value = "반납 예정 일시")

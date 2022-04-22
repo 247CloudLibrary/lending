@@ -1,7 +1,6 @@
 package com.cloudlibrary.lending.infrastructure.persistence.mysql.entity;
 
 import com.cloudlibrary.lending.application.domain.Lending;
-import com.cloudlibrary.lending.application.domain.LendingStatus;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -31,9 +30,8 @@ public class LendingEntity implements Serializable {
     @Column(nullable = false)
     private String libraryName;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private LendingStatus lendingStatus;
+    private String lendingStatus;
 
 
     @Column(nullable = false)

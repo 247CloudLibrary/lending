@@ -1,12 +1,9 @@
 package com.cloudlibrary.lending.application.service;
 
-import com.cloudlibrary.lending.application.domain.LendingStatus;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 public interface LendingOperationUseCase {
 
@@ -22,7 +19,7 @@ public interface LendingOperationUseCase {
         private Long libraryId;
         private String libraryName;
 
-        private LendingStatus lendingStatus;
+        private String lendingStatus;
 
         private String lendingDateTime;
         private String returnDateTime;

@@ -50,6 +50,6 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
 
     @Override
     public List<FindLendingResult> getAllLendingOrderByTimeDesc() {
-        return lendingEntityRepository.findAllByOrderByLendingDateTimeDesc().stream().map(FindLendingResult::findByLending).collect(Collectors.toList());
+        return lendingMapper.findAllByOrderByLendingDateTimeDesc().stream().map(FindLendingResult::findByLending).collect(Collectors.toList());
     }
 }

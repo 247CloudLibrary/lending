@@ -1,7 +1,6 @@
 package com.cloudlibrary.lending.application.service;
 
 import com.cloudlibrary.lending.application.domain.Lending;
-import com.cloudlibrary.lending.application.domain.LendingStatus;
 import lombok.*;
 
 import java.util.List;
@@ -34,7 +33,7 @@ public interface LendingReadUseCase {
         private final Long libraryId;
         private final String libraryName;
 
-        private final LendingStatus lendingStatus;
+        private final String lendingStatus;
 
         private final String lendingDateTime;
         private final String returnDateTime;

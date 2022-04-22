@@ -16,7 +16,7 @@ public class Lending {
     private final Long libraryId;
     private final String libraryName;
 
-    private final LendingStatus lendingStatus;
+    private final String lendingStatus;
 
     private final String lendingDateTime;
     private final String returnDateTime;

@@ -1,25 +1,19 @@
 package com.cloudlibrary.lending.ui.controller;
 
-import com.cloudlibrary.lending.application.domain.LendingStatus;
 import com.cloudlibrary.lending.application.service.*;
 import com.cloudlibrary.lending.exception.CloudLibraryException;
 import com.cloudlibrary.lending.exception.MessageType;
-import com.cloudlibrary.lending.ui.feign.FeignClient;
 import com.cloudlibrary.lending.ui.requestBody.LendingCreateRequest;
-import com.cloudlibrary.lending.ui.requestBody.LendingUpdateRequest;
 import com.cloudlibrary.lending.ui.view.ApiResponseView;
 import com.cloudlibrary.lending.ui.view.lending.LendingView;
 import io.swagger.annotations.Api;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,7 +46,7 @@ public class LendingController {
                 .uid(request.getUid())
                 .libraryId(request.getLibraryId())
                 .libraryName(request.getLibraryName())
-                .lendingStatus(LendingStatus.OUT)
+                .lendingStatus("OUT")
                 .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
                 .returnDateTime("0")
                 .barcode(request.getBarcode())
@@ -86,7 +80,7 @@ public class LendingController {
                 .uid(1L)
                 .libraryId(1L)
                 .libraryName("반납으로 수정함")
-                .lendingStatus(LendingStatus.RETURN)
+                .lendingStatus("RETURN")
                 .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .returnDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
                 .barcode("34235kfjs3")
