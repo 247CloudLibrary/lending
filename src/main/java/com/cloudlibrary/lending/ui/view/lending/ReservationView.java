@@ -29,8 +29,8 @@ public class ReservationView {
     @ApiModelProperty(value = "도서관 이름")
     private final String libraryName;
     @ApiModelProperty(value = "예약 일시")
-    private final LocalDateTime reservationDateTime;
+    private final String reservationDateTime;
     @ApiModelProperty(value = "예약 취소 예정 일시")
-    private final LocalDateTime cancelDateTime;
+    private final String cancelDateTime;
 
 }

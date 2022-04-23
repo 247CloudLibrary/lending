@@ -1,13 +1,26 @@
 package com.cloudlibrary.lending.application.service;
 
 import com.cloudlibrary.lending.application.domain.LibrariesRules;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 public interface LibrariesRulesReadUseCase {
 
+    Boolean isLendingPossible(IsPossibleFindQuery query);
+
+    @NoArgsConstructor
+    @EqualsAndHashCode(callSuper = false)
+    @Getter
+    @ToString
+    class IsPossibleFindQuery {
+        private Long uid;
+        private Long libraryId;
+
+        public IsPossibleFindQuery(Long uid, Long libraryId)
+        {
+            this.uid = uid;
+            this.libraryId = libraryId;
+        }
+    }
 
     @Setter
     @Getter

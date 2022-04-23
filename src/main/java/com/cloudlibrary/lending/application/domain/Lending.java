@@ -4,24 +4,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
 @Getter
 @ToString
 @Builder
 public class Lending {
 
-    private final Long lendingId;
+    private Long lendingId;
 
-    private final Long bookId;
-    private final Long uid;
-    private final Long libraryId;
-    private final String libraryName;
+    private Long bookId;
+    private Long uid;
+    private Long libraryId;
+    private String libraryName;
 
-    private final LendingStatus lendingStatus;
+    private String lendingStatus;
 
-    private final LocalDateTime lendingDateTime;
-    private final LocalDateTime returnDateTime;
-    private final String barcode;
-    private final String rfid;
+    private String lendingDateTime;
+    private String returnDateTime;
+    private String barcode;
+    private String rfid;
 }

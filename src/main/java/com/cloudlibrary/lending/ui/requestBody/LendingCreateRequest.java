@@ -11,4 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 public class LendingCreateRequest {
 
+    private Long bookId;
+    private Long uid;
+    private Long libraryId;
+    private String libraryName;
+
+    private String barcode;
+    private String rfid;
+
 }

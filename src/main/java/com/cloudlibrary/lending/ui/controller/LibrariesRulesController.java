@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RestController
 @Api(value = "도서관규정 API")
-@RequestMapping("/v1/lending/libraries-rules")
+@RequestMapping("/v1/lending")
 public class LibrariesRulesController {
 
     private final LibrariesRulesOperationUseCase librariesRulesOperationUseCase;
@@ -33,17 +33,14 @@ public class LibrariesRulesController {
         this.librariesRulesReadUseCase = librariesRulesReadUseCase;
     }
 
-    @GetMapping("")
-    public ResponseEntity<ApiResponseView<Boolean>> getUserLendingPossible(@RequestParam("uid") Long uid) {
-        //var query = new AdminReadUseCase.AdminFindQuery(id);
-
-        //var result = AdminReadUseCase.getAdmin(query);
-
-        //return ResponseEntity.ok(new ApiResponseView<>(new AdminView(result)));
-        return ResponseEntity.ok(new ApiResponseView<>(true));
+    @GetMapping("/libraries-rules")
+    public ResponseEntity<ApiResponseView<Boolean>> getUserLendingPossible(@RequestParam("uid") Long uid, @RequestParam("libraryId") Long libraryId) {
+        var query = new LibrariesRulesReadUseCase.IsPossibleFindQuery(uid, libraryId);
+        var result = librariesRulesReadUseCase.isLendingPossible(query);
+        return ResponseEntity.ok(new ApiResponseView<>(result));
     }
 
-    @PatchMapping("")
+    @PatchMapping("/libraries-rules")
     public ResponseEntity<ApiResponseView<LibrariesRulesView>> createRules(@RequestBody LibrariesRulesCreateRequest request) {
         if (ObjectUtils.isEmpty(request)) {
             throw new CloudLibraryException(MessageType.BAD_REQUEST);
@@ -62,5 +59,16 @@ public class LibrariesRulesController {
         var result = librariesRulesOperationUseCase.createLibrariesRules(command);
 
         return ResponseEntity.ok(new ApiResponseView<>(new LibrariesRulesView(result)));
+    }
+
+    @PatchMapping("/libraries-rules-withdraw")
+    public ResponseEntity<ApiResponseView<LibrariesRulesView>> deleteRules(@RequestBody LibrariesRulesUpdateRequest request) {
+        var command = LibrariesRulesOperationUseCase.LibrariesRulesDeleteCommand.builder()
+                .libraryId((request.getLibraryId()))
+                .build();
+
+        librariesRulesOperationUseCase.deleteLibrariesRules(command);
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cloudlibrary.lending.infrastructure.mapper.LendingMapper">
+
+    <select id="findAllByOrderByLendingDateTimeDesc" resultType="com.cloudlibrary.lending.application.domain.Lending">
+        <![CDATA[
+            select * from lending order by lending_date_time DESC;
+        ]]>
+    </select>
+
+    <select id="findLendingByUid" resultType="com.cloudlibrary.lending.application.domain.Lending" parameterType="Long">
+        <![CDATA[
+        select * from lending where uid=#{uid}
+        ]]>
+    </select>
+
+    <delete id="deleteBlacklist">
+        <![CDATA[
+        delete from blacklist where uid=#{uid}
+        ]]>
+
+    </delete>
+</mapper>

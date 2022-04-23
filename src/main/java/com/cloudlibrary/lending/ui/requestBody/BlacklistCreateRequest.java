@@ -9,15 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class LibrariesRulesUpdateRequest {
+public class BlacklistCreateRequest {
+    private Long uid;
     private Long libraryId;
     private String libraryName;
-
-    private int lendingAvailableCount;
-    private int lengdingAvailableDays;
-
-    private int overdueCount;
-    private int longtermOverdueDays;
-    private int lendingLimitDays;
-
 }

@@ -7,9 +7,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class BlackList {
-    private final Long uid;
-    private final Long libraryId;
-    private final String libraryName;
+public class Blacklist {
+    private Long blacklistId;
+    private Long uid;
+    private Long libraryId;
+    private String libraryName;
 
 }
