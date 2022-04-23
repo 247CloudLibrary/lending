@@ -1,4 +1,16 @@
 package com.cloudlibrary.lending.ui.requestBody;
 
-public class BlackListCreateRequest {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class BlacklistCreateRequest {
+    private Long uid;
+    private Long libraryId;
+    private String libraryName;
 }

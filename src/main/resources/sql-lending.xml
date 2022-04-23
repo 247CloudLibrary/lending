@@ -29,6 +29,10 @@
     </select>
 
 
-
+    <select id="findAllBlacklist" resultType="com.cloudlibrary.lending.application.domain.Blacklist">
+        <![CDATA[
+        select * from blacklist;
+        ]]>
+    </select>
 
 </mapper>
