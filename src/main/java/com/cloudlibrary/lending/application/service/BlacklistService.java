@@ -10,17 +10,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class BlacklistService implements BlacklistOperationUseCase, BlacklistReadUseCase {
 
     private final BlacklistEntityRepository blacklistEntityRepository;
+    private final LendingMapper lendingMapper;
 
     @Autowired
-    public BlacklistService(BlacklistEntityRepository blacklistEntityRepository){
+    public BlacklistService(BlacklistEntityRepository blacklistEntityRepository, LendingMapper lendingMapper){
         this.blacklistEntityRepository = blacklistEntityRepository;
+        this.lendingMapper = lendingMapper;
     }
 
 
@@ -54,7 +55,7 @@ public class BlacklistService implements BlacklistOperationUseCase, BlacklistRea
     @Override
     public void deleteBlacklist(BlacklistDeleteCommand command) {
         BlacklistEntity blacklistEntity = BlacklistEntity.builder().uid(command.getUid()).build();
-        blacklistEntityRepository.delete(blacklistEntity);
+        lendingMapper.deleteBlacklist(command.getUid());
     }
 
 }

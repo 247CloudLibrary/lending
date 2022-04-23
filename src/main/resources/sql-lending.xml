@@ -14,4 +14,11 @@
         select * from lending where uid=#{uid}
         ]]>
     </select>
+
+    <delete id="deleteBlacklist">
+        <![CDATA[
+        delete from blacklist where uid=#{uid}
+        ]]>
+
+    </delete>
 </mapper>

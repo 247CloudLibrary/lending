@@ -54,9 +54,6 @@ public class LendingController {
                 .build();
         var result = lendingOperationUseCase.createAdmin(command);
 
-        //TODO : feign
-
-
         return ResponseEntity.ok(new ApiResponseView<>(new LendingView(result)));
     }
 

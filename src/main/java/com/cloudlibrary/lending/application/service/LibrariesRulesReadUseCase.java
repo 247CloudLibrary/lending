@@ -5,17 +5,19 @@ import lombok.*;
 
 public interface LibrariesRulesReadUseCase {
 
-
-    void getLibrariesRules(LibrariesRulesFindQuery query);
+    Boolean isLendingPossible(IsPossibleFindQuery query);
 
     @NoArgsConstructor
     @EqualsAndHashCode(callSuper = false)
     @Getter
     @ToString
-    class LibrariesRulesFindQuery {
+    class IsPossibleFindQuery {
+        private Long uid;
         private Long libraryId;
 
-        public LibrariesRulesFindQuery(Long libraryId) {
+        public IsPossibleFindQuery(Long uid, Long libraryId)
+        {
+            this.uid = uid;
             this.libraryId = libraryId;
         }
     }

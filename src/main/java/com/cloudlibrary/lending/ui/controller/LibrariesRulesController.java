@@ -35,9 +35,9 @@ public class LibrariesRulesController {
 
     @GetMapping("/libraries-rules")
     public ResponseEntity<ApiResponseView<Boolean>> getUserLendingPossible(@RequestParam("uid") Long uid, @RequestParam("libraryId") Long libraryId) {
-        //TODO : uid로 블랙리스트인지 아닌지 + uid로 대출한 횟수 조회한 뒤 도서관 제한숫자보다 크다 적다 봐야, 도서관 id필요
-
-        return ResponseEntity.ok(new ApiResponseView<>(true));
+        var query = new LibrariesRulesReadUseCase.IsPossibleFindQuery(uid, libraryId);
+        var result = librariesRulesReadUseCase.isLendingPossible(query);
+        return ResponseEntity.ok(new ApiResponseView<>(result));
     }
 
     @PatchMapping("/libraries-rules")

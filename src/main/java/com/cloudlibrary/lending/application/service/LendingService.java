@@ -44,6 +44,7 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
                 .build();
         LendingEntity lendingEntity = new LendingEntity(lending);
         lendingEntityRepository.save(lendingEntity);
+        //TODO feign
         //String feign = feignClient.compositeBookOut(command.getBookId(), command.getLendingStatus());
         //System.out.println("feign = " + feign);
         lending = lendingEntity.toLending();
