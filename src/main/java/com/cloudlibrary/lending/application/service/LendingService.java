@@ -1,6 +1,8 @@
 package com.cloudlibrary.lending.application.service;
 
 import com.cloudlibrary.lending.application.domain.Lending;
+import com.cloudlibrary.lending.exception.CloudLibraryException;
+import com.cloudlibrary.lending.exception.MessageType;
 import com.cloudlibrary.lending.infrastructure.mapper.LendingMapper;
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.entity.LendingEntity;
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.repository.LendingEntityRepository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -51,5 +54,10 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
     @Override
     public List<FindLendingResult> getAllLendingOrderByTimeDesc() {
         return lendingMapper.findAllByOrderByLendingDateTimeDesc().stream().map(FindLendingResult::findByLending).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FindLendingResult> getLendingByUid(LendingFindQueryByUid query) {
+        return lendingMapper.findLendingByUid(query.getUid()).stream().map(FindLendingResult::findByLending).collect(Collectors.toList());
     }
 }

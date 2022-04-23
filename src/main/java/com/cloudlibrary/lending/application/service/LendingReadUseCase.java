@@ -8,6 +8,7 @@ import java.util.List;
 public interface LendingReadUseCase {
 
     List<FindLendingResult> getAllLendingOrderByTimeDesc();
+    List<FindLendingResult> getLendingByUid(LendingFindQueryByUid query);
 
     @NoArgsConstructor
     @EqualsAndHashCode(callSuper = false)
@@ -18,6 +19,18 @@ public interface LendingReadUseCase {
 
         public LendingFindQuery(Long lendingId) {
             this.lendingId = lendingId;
+        }
+    }
+
+    @NoArgsConstructor
+    @EqualsAndHashCode(callSuper = false)
+    @Getter
+    @ToString
+    class LendingFindQueryByUid {
+        private Long uid;
+
+        public LendingFindQueryByUid(Long uid) {
+            this.uid = uid;
         }
     }
 

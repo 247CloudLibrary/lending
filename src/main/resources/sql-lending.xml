@@ -22,4 +22,13 @@
         ]]>
     </select>
 
+    <select id="findLendingByUid" resultType="com.cloudlibrary.lending.application.domain.Lending" parameterType="Long">
+        <![CDATA[
+        select * from lending where uid=#{uid}
+        ]]>
+    </select>
+
+
+
+
 </mapper>
