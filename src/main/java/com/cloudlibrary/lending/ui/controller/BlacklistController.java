@@ -58,11 +58,16 @@ public class BlacklistController {
         return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(BlacklistView::new).collect(Collectors.toList())));
     }
 
-    //블랙리스트 삭제
     @DeleteMapping("")
     public ResponseEntity<ApiResponseView<BlacklistView>> deleteBlacklist(@RequestParam("uid") Long uid) {
-        //return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        var command = BlacklistOperationUseCase.BlacklistDeleteCommand.builder()
+                .uid(uid)
+                .build();
+
+        blacklistOperationUseCase.deleteBlacklist(command);
+
+        return ResponseEntity.noContent().build();
+
 
     }
 }

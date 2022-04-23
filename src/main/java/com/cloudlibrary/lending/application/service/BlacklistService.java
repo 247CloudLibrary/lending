@@ -1,13 +1,14 @@
 package com.cloudlibrary.lending.application.service;
 
 import com.cloudlibrary.lending.application.domain.Blacklist;
-import com.cloudlibrary.lending.infrastructure.mapper.BlacklistMapper;
+import com.cloudlibrary.lending.infrastructure.mapper.LendingMapper;
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.entity.BlacklistEntity;
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.repository.BlacklistEntityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,12 +17,10 @@ import java.util.stream.Collectors;
 public class BlacklistService implements BlacklistOperationUseCase, BlacklistReadUseCase {
 
     private final BlacklistEntityRepository blacklistEntityRepository;
-    private final BlacklistMapper blacklistMapper;
 
     @Autowired
-    public BlacklistService(BlacklistEntityRepository blacklistEntityRepository, BlacklistMapper blacklistMapper){
+    public BlacklistService(BlacklistEntityRepository blacklistEntityRepository){
         this.blacklistEntityRepository = blacklistEntityRepository;
-        this.blacklistMapper = blacklistMapper;
     }
 
 
@@ -42,6 +41,20 @@ public class BlacklistService implements BlacklistOperationUseCase, BlacklistRea
 
     @Override
     public List<FindBlacklistResult> getAllBlacklist() {
-        return blacklistMapper.findAllBlacklist().stream().map(FindBlacklistResult::findByBlacklist).collect(Collectors.toList());
+        var results = blacklistEntityRepository.findAll();
+        List<FindBlacklistResult> findBlacklistResults = new ArrayList<>();
+
+        for(BlacklistEntity blacklistEntity : results){
+            findBlacklistResults.add(FindBlacklistResult.findByBlacklist(blacklistEntity.toBlacklist()));
+        }
+
+        return findBlacklistResults;
     }
+
+    @Override
+    public void deleteBlacklist(BlacklistDeleteCommand command) {
+        BlacklistEntity blacklistEntity = BlacklistEntity.builder().uid(command.getUid()).build();
+        blacklistEntityRepository.delete(blacklistEntity);
+    }
+
 }

@@ -9,8 +9,8 @@ import lombok.ToString;
 @Builder
 public class Blacklist {
     private Long blacklistId;
-    private final Long uid;
-    private final Long libraryId;
-    private final String libraryName;
+    private Long uid;
+    private Long libraryId;
+    private String libraryName;
 
 }

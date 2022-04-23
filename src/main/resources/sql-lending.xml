@@ -3,20 +3,7 @@
 
 <mapper namespace="com.cloudlibrary.lending.infrastructure.mapper.LendingMapper">
 
-    <resultMap id="AllLendingMap" type="com.cloudlibrary.lending.application.domain.Lending">
-        <result column="lending_id" property="lendingId" jdbcType="BIGINT" javaType="Long"/>
-        <result column="book_id" property="bookId" jdbcType="BIGINT" javaType="Long"/>
-        <result column="uid" property="uid" jdbcType="BIGINT" javaType="Long"/>
-        <result column="library_id" property="libraryId" jdbcType="BIGINT" javaType="Long"/>
-        <result column="library_name" property="libraryName" jdbcType="VARCHAR" javaType="String"/>
-        <result column="lending_status" property="lendingStatus" jdbcType="VARCHAR" javaType="String"/>
-        <result column="lending_date_time" property="lendingDateTime" jdbcType="VARCHAR" javaType="String"/>
-        <result column="return_date_time" property="returnDateTime" jdbcType="VARCHAR" javaType="String"/>
-        <result column="barcode" property="barcode" jdbcType="VARCHAR" javaType="String"/>
-        <result column="rfid" property="rfid" jdbcType="VARCHAR" javaType="String"/>
-    </resultMap>
-
-    <select id="findAllByOrderByLendingDateTimeDesc" resultMap="AllLendingMap">
+    <select id="findAllByOrderByLendingDateTimeDesc" resultType="com.cloudlibrary.lending.application.domain.Lending">
         <![CDATA[
             select * from lending order by lending_date_time DESC;
         ]]>
@@ -27,12 +14,4 @@
         select * from lending where uid=#{uid}
         ]]>
     </select>
-
-
-    <select id="findAllBlacklist" resultType="com.cloudlibrary.lending.application.domain.Blacklist">
-        <![CDATA[
-        select * from blacklist;
-        ]]>
-    </select>
-
 </mapper>

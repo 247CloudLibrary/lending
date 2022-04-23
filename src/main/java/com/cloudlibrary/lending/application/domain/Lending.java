@@ -9,17 +9,17 @@ import lombok.ToString;
 @Builder
 public class Lending {
 
-    private final Long lendingId;
+    private Long lendingId;
 
-    private final Long bookId;
-    private final Long uid;
-    private final Long libraryId;
-    private final String libraryName;
+    private Long bookId;
+    private Long uid;
+    private Long libraryId;
+    private String libraryName;
 
-    private final String lendingStatus;
+    private String lendingStatus;
 
-    private final String lendingDateTime;
-    private final String returnDateTime;
-    private final String barcode;
-    private final String rfid;
+    private String lendingDateTime;
+    private String returnDateTime;
+    private String barcode;
+    private String rfid;
 }

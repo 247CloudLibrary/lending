@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class Reservation {
-    private final Long orderNum;
+    private Long orderNum;
 
-    private final Long lendingId;
-    private final Long uid;
-    private final Long bookId;
-    private final Long libraryId;
-    private final String libraryName;
-    private final String reservationDateTime;
-    private final String cancelDateTime;
+    private Long lendingId;
+    private Long uid;
+    private Long bookId;
+    private Long libraryId;
+    private String libraryName;
+    private String reservationDateTime;
+    private String cancelDateTime;
 
 }

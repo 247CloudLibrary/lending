@@ -9,6 +9,8 @@ public interface BlacklistOperationUseCase {
 
     BlacklistReadUseCase.FindBlacklistResult createBlacklist(BlacklistCreatedCommand command);
 
+    void deleteBlacklist(BlacklistDeleteCommand command);
+
     @EqualsAndHashCode(callSuper = false)
     @Builder
     @Getter
@@ -17,5 +19,13 @@ public interface BlacklistOperationUseCase {
         private Long uid;
         private Long libraryId;
         private String libraryName;
+    }
+
+    @EqualsAndHashCode(callSuper = false)
+    @Builder
+    @Getter
+    @ToString
+    class BlacklistDeleteCommand {
+        private Long uid;
     }
 }

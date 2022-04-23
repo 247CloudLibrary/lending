@@ -1,7 +1,6 @@
 package com.cloudlibrary.lending.infrastructure.persistence.mysql.entity;
 
 import com.cloudlibrary.lending.application.domain.Blacklist;
-import com.cloudlibrary.lending.application.domain.Lending;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -30,6 +29,7 @@ public class BlacklistEntity implements Serializable {
 
     public Blacklist toBlacklist() {
         return Blacklist.builder()
+                .blacklistId(getBlacklistId())
                 .uid(getUid())
                 .libraryId(getLibraryId())
                 .libraryName(getLibraryName())
@@ -37,6 +37,7 @@ public class BlacklistEntity implements Serializable {
     }
 
     public BlacklistEntity(Blacklist blacklist) {
+        this.blacklistId = blacklist.getBlacklistId();
         this.uid = blacklist.getUid();
         this.libraryId = blacklist.getLibraryId();
         this.libraryName = blacklist.getLibraryName();

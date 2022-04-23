@@ -8,14 +8,14 @@ import lombok.ToString;
 @ToString
 @Builder
 public class LibrariesRules {
-    private final Long libraryId;
-    private final String libraryName;
+    private Long libraryId;
+    private String libraryName;
 
-    private final int lendingAvailableCount;
-    private final int lengdingAvailableDays;
+    private int lendingAvailableCount;
+    private int lengdingAvailableDays;
 
-    private final int overdueCount;
-    private final int longtermOverdueDays;
-    private final int lendingLimitDays;
+    private int overdueCount;
+    private int longtermOverdueDays;
+    private int lendingLimitDays;
 
 }
