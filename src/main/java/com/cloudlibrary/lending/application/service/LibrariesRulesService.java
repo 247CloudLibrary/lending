@@ -30,19 +30,14 @@ public class LibrariesRulesService implements LibrariesRulesReadUseCase, Librari
 
     @Override
     public Boolean isLendingPossible(IsPossibleFindQuery query) {
-        //TODO : uid로 블랙리스트인지 아닌지 + uid로 대출한 횟수 조회 + 도서관id로 제한숫자 조회해서 크다 적다 보기
         var list = blacklistEntityRepository.findByUidAndLibraryId(query.getUid(), query.getLibraryId());
-        System.out.println("list = 매퍼에서 select로 꺼내온거 없으면 어떻게 찍히는지" + list);
         if(!list.isEmpty()){
-            System.out.println("블랙리스트있어");
             return false;
         }
-        System.out.println("블랙리스트없어");
 
         var rules = librariesRulesEntityRepository.findById(query.getLibraryId());
         var lendingCount = lendingEntityRepository.findByUidAndLibraryId(query.getUid(), query.getLibraryId());
-        System.out.println("도서관 룰 렌딩 개수 세지는지 " + rules.get().getLendingAvailableCount());
-        System.out.println("lendingCount = " + lendingCount.size());
+
         if(rules.get().getLendingAvailableCount()<=lendingCount.size()){
             return false;
         }
