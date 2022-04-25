@@ -65,7 +65,7 @@ public class ReservationService implements ReservationReadUseCase, ReservationOp
         reservationEntityRepository.delete(findReservation.get());
 
         FeignReservationRequest feignReservationRequest = FeignReservationRequest.builder()
-                .orderNum(null)
+                .orderNum(Long.valueOf(-1))
                 .bookId(bookId)
                 .build();
         String feignMessage = feignClient.updateReservationInfo(feignReservationRequest, bookId);
