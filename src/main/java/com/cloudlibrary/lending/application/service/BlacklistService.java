@@ -7,6 +7,8 @@ import com.cloudlibrary.lending.infrastructure.persistence.mysql.repository.Blac
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class BlacklistService implements BlacklistOperationUseCase, BlacklistRea
     }
 
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public FindBlacklistResult createBlacklist(BlacklistCreatedCommand command) {
         Blacklist blacklist = Blacklist.builder()
@@ -52,6 +55,7 @@ public class BlacklistService implements BlacklistOperationUseCase, BlacklistRea
         return findBlacklistResults;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public void deleteBlacklist(BlacklistDeleteCommand command) {
         lendingMapper.deleteBlacklist(command.getUid());

@@ -9,6 +9,8 @@ import com.cloudlibrary.lending.infrastructure.persistence.mysql.repository.Lend
 import com.cloudlibrary.lending.infrastructure.persistence.mysql.repository.LibrariesRulesEntityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +47,7 @@ public class LibrariesRulesService implements LibrariesRulesReadUseCase, Librari
         return true;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public FindLibrariesRulesResult createLibrariesRules(LibrariesRulesCreatedCommand command) {
 
@@ -66,6 +69,7 @@ public class LibrariesRulesService implements LibrariesRulesReadUseCase, Librari
         return FindLibrariesRulesResult.findByLibrariesRules(librariesRules);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public void deleteLibrariesRules(LibrariesRulesDeleteCommand command) {
         Optional<LibrariesRulesEntity> librariesRulesEntity = librariesRulesEntityRepository.findById(command.getLibraryId());

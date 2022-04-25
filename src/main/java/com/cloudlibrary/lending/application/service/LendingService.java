@@ -9,6 +9,8 @@ import com.cloudlibrary.lending.ui.requestBody.FeignLendingStatusUpdateRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +30,7 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
         this.lendingMapper = lendingMapper;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public FindLendingResult createLending(LendingCreateCommand command) {
         Lending lending = Lending.builder()
@@ -51,6 +54,7 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
         return FindLendingResult.findByLending(lending);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public FindLendingResult updateLending(LendingUpdateCommand command) {
         Optional<LendingEntity> lendingEntity = lendingEntityRepository.findById(command.getLendingId());

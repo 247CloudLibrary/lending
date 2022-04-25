@@ -8,6 +8,8 @@ import com.cloudlibrary.lending.ui.requestBody.FeignReservationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class ReservationService implements ReservationReadUseCase, ReservationOp
         this.feignClient = feignClient;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public FindReservationResult createReservation(ReservationCreatedCommand command) {
         Reservation reservation = Reservation.builder()
@@ -57,6 +60,7 @@ public class ReservationService implements ReservationReadUseCase, ReservationOp
         return ReservationReadUseCase.FindReservationResult.findByReservation(reservation);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public void deleteReservation(ReservationDeleteCommand command) {
         var findReservation = reservationEntityRepository.findById(command.getOrderNum());
