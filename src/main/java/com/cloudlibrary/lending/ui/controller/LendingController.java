@@ -48,11 +48,11 @@ public class LendingController {
                 .libraryName(request.getLibraryName())
                 .lendingStatus("OUT")
                 .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
-                .returnDateTime("0")
+                .returnDateTime(LocalDateTime.now().plusDays(7).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
                 .barcode(request.getBarcode())
                 .rfid(request.getRfid())
                 .build();
-        var result = lendingOperationUseCase.createAdmin(command);
+        var result = lendingOperationUseCase.createLending(command);
 
         return ResponseEntity.ok(new ApiResponseView<>(new LendingView(result)));
     }
@@ -65,25 +65,16 @@ public class LendingController {
 
     }
 
-
-
-    //반납
     @PatchMapping("")
-    public ResponseEntity<ApiResponseView<LendingView>> updateLendingReturn(@RequestParam("uid") Long uid, @RequestParam("lendingStatus") String lendingStatus) {
+    public ResponseEntity<ApiResponseView<LendingView>> updateLending(@RequestParam("lendingId") Long lendingId, @RequestParam("lendingStatus") String lendingStatus) {
 
-        return ResponseEntity.ok(new ApiResponseView<>(LendingView.builder()
-                .lendingId(1L)
-                .bookId(1L)
-                .uid(1L)
-                .libraryId(1L)
-                .libraryName("반납으로 수정함")
-                .lendingStatus("RETURN")
-                .lendingDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .returnDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .barcode("34235kfjs3")
-                .rfid("ytuwtwkjeq9")
-                .build()
-        ));
+        var command = LendingOperationUseCase.LendingUpdateCommand.builder()
+                .lendingId(lendingId)
+                .lendingStatus(lendingStatus)
+                .build();
+        var result = lendingOperationUseCase.updateLending(command);
+
+        return ResponseEntity.ok(new ApiResponseView<>(new LendingView(result)));
     }
 
 }
