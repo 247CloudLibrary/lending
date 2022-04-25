@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -67,7 +68,7 @@ public class LibrariesRulesService implements LibrariesRulesReadUseCase, Librari
 
     @Override
     public void deleteLibrariesRules(LibrariesRulesDeleteCommand command) {
-        LibrariesRulesEntity librariesRulesEntity = LibrariesRulesEntity.builder().libraryId(command.getLibraryId()).build();
-        librariesRulesEntityRepository.delete(librariesRulesEntity);
+        Optional<LibrariesRulesEntity> librariesRulesEntity = librariesRulesEntityRepository.findById(command.getLibraryId());
+        librariesRulesEntityRepository.delete(librariesRulesEntity.get());
     }
 }

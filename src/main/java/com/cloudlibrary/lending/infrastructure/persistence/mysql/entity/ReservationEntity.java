@@ -1,6 +1,5 @@
 package com.cloudlibrary.lending.infrastructure.persistence.mysql.entity;
 
-import com.cloudlibrary.lending.application.domain.Lending;
 import com.cloudlibrary.lending.application.domain.Reservation;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -8,8 +7,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 
 @DynamicUpdate
-@AllArgsConstructor
-@Builder
 @Setter
 @Getter
 @NoArgsConstructor
