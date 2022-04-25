@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @DynamicUpdate
-@AllArgsConstructor
-@Builder
 @Setter
 @Getter
 @NoArgsConstructor

@@ -63,8 +63,8 @@ public class LendingService implements LendingOperationUseCase, LendingReadUseCa
         Lending lending = lendingEntity.get().toLending();
 
         FeignLendingStatusUpdateRequest lendingStatusUpdateRequest = FeignLendingStatusUpdateRequest.builder().lendingStatus(command.getLendingStatus()).build();
-        feignClient.updateLendingStatus(lendingEntity.get().getBookId(), lendingStatusUpdateRequest);
-
+        String feignMesssage = feignClient.updateLendingStatus(lendingEntity.get().getBookId(), lendingStatusUpdateRequest);
+        System.out.println("feignMesssage = " + feignMesssage);
         return FindLendingResult.findByLending(lending);
     }
 

@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @CrossOrigin(origins = "*")
@@ -25,17 +26,17 @@ import java.util.List;
 @Api(value = "예약 API")
 @RequestMapping("/v1/lending/reservation")
 public class ReservationController {
-    /*
+
     private final ReservationOperationUseCase reservationOperationUseCase;
     private final ReservationReadUseCase reservationReadUseCase;
 
     @Autowired
-    public BookController(ReservationOperationUseCase reservationOperationUseCase,
+    public ReservationController(ReservationOperationUseCase reservationOperationUseCase,
                           ReservationReadUseCase reservationReadUseCase) {
         this.reservationOperationUseCase = reservationOperationUseCase;
         this.reservationReadUseCase = reservationReadUseCase;
     }
-     */
+
 
 
     @PostMapping("")
@@ -43,54 +44,35 @@ public class ReservationController {
         if (ObjectUtils.isEmpty(request)) {
             throw new CloudLibraryException(MessageType.BAD_REQUEST);
         }
+        var command = ReservationOperationUseCase.ReservationCreatedCommand.builder()
+                .lendingId(request.getLendingId())
+                .uid(request.getUid())
+                .bookId(request.getBookId())
+                .libraryId(request.getLibraryId())
+                .libraryName(request.getLibraryName())
+                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
+                .cancelDateTime(LocalDateTime.now().plusDays(7).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
+                .build();
 
-        //return ResponseEntity.ok(new ApiResponseView<>(new ReservationView(result)));
-        return ResponseEntity.ok(new ApiResponseView<>(ReservationView.builder()
-                .orderNum(1L)
-                .lendingId(1L)
-                .uid(1L)
-                .bookId(1L)
-                .libraryId(1L)
-                .libraryName("예약등록서초도서관")
-                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .build()
-        ));
+        var result = reservationOperationUseCase.createReservation(command);
+        return ResponseEntity.ok(new ApiResponseView<>(new ReservationView(result)));
     }
 
 
     @GetMapping("")
-    public ResponseEntity<ApiResponseView<List<ReservationView>>> getReservations() {
-        ReservationView reservationView1 = ReservationView.builder()
-                .orderNum(2L)
-                .lendingId(2L)
-                .uid(2L)
-                .bookId(2L)
-                .libraryId(1L)
-                .libraryName("예약조회도서관")
-                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .build();
-        ReservationView reservationView2 = ReservationView.builder()
-                .orderNum(3L)
-                .lendingId(3L)
-                .uid(3L)
-                .bookId(3L)
-                .libraryId(1L)
-                .libraryName("송파도서관")
-                .reservationDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")))
-                .build();
-        List<ReservationView> reservationView = new ArrayList<>();
-        reservationView.add(reservationView1);
-        reservationView.add(reservationView2);
+    public ResponseEntity<ApiResponseView<List<ReservationView>>> getReservationsByUid(@RequestParam Long uid) {
+        var results = reservationReadUseCase.getReservationListAll(uid);
 
-        //return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(AdminView::new).collect(Collectors.toList())));
-        return ResponseEntity.ok(new ApiResponseView<>(reservationView));
+        return ResponseEntity.ok(new ApiResponseView<>(results.stream().map(ReservationView::new).collect(Collectors.toList())));
     }
 
 
     @DeleteMapping("")
-    public ResponseEntity<ApiResponseView<ReservationView>> deleteByOrderNum(@RequestParam("orderNum") String orderNum) {
-        System.out.println(orderNum);
-        return ResponseEntity.ok().build();
-
+    public ResponseEntity<ApiResponseView<ReservationView>> deleteByOrderNum(@RequestParam("orderNum") Long orderNum) {
+        var command = ReservationOperationUseCase.ReservationDeleteCommand.builder()
+                                .orderNum(orderNum)
+                                .build();
+        reservationOperationUseCase.deleteReservation(command);
+        return ResponseEntity.noContent().build();
     }
 }
