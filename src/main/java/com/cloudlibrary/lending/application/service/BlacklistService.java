@@ -54,7 +54,6 @@ public class BlacklistService implements BlacklistOperationUseCase, BlacklistRea
 
     @Override
     public void deleteBlacklist(BlacklistDeleteCommand command) {
-        BlacklistEntity blacklistEntity = BlacklistEntity.builder().uid(command.getUid()).build();
         lendingMapper.deleteBlacklist(command.getUid());
     }
 

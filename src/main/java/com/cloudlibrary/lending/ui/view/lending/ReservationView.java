@@ -1,14 +1,14 @@
 package com.cloudlibrary.lending.ui.view.lending;
 
+import com.cloudlibrary.lending.application.service.ReservationReadUseCase;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
-
+@AllArgsConstructor
 @Getter
 @ToString
 @Builder
@@ -32,5 +32,16 @@ public class ReservationView {
     private final String reservationDateTime;
     @ApiModelProperty(value = "예약 취소 예정 일시")
     private final String cancelDateTime;
+
+    public ReservationView(ReservationReadUseCase.FindReservationResult result){
+        this.orderNum = result.getOrderNum();
+        this.lendingId = result.getLendingId();
+        this.uid = result.getUid();
+        this.bookId = result.getBookId();
+        this.libraryId = result.getLibraryId();
+        this.libraryName = result.getLibraryName();
+        this.reservationDateTime = result.getReservationDateTime();
+        this.cancelDateTime = result.getCancelDateTime();
+    }
 
 }

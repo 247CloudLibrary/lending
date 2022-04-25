@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @DynamicUpdate
-@AllArgsConstructor
-@Builder
 @Setter
 @Getter
 @NoArgsConstructor
