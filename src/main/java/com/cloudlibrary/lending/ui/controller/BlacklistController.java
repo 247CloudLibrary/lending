@@ -36,7 +36,7 @@ public class BlacklistController {
         this.blacklistReadUseCase = blacklistReadUseCase;
     }
 
-    @PatchMapping("")
+    @PutMapping("")
     public ResponseEntity<ApiResponseView<BlacklistView>> createBlacklist(@RequestBody BlacklistCreateRequest request) {
         if (ObjectUtils.isEmpty(request)) {
             throw new CloudLibraryException(MessageType.BAD_REQUEST);
