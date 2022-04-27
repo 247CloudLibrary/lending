@@ -7,7 +7,6 @@ import lombok.ToString;
 
 @Getter
 @ToString
-
 @NoArgsConstructor
 public class Lending {
 
