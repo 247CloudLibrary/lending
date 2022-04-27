@@ -43,8 +43,8 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 
 	implementation 'com.amazonaws.secretsmanager:aws-secretsmanager-jdbc:1.0.7'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.3'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.3'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE'
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.1'
 }
