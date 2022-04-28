@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @org.springframework.cloud.openfeign.FeignClient(name="feign"
-        , url="http://ecs-alb-167470959.us-east-1.elb.amazonaws.com/v1/composite")
+        , url="https://www.cloudlibrary.shop/v1/composite")
 public interface FeignClient {
 
 
